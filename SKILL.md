@@ -1,0 +1,147 @@
+---
+name: euskalmet
+description: Tool for obtaining weather forecasts for the Basque Country through the Euskalmet agency. Use when the user wants to know today's weather, temperatures, or the general forecast.
+---
+# Euskalmet Skill
+
+Specialized tool for retrieving weather forecast data from the Euskalmet (Basque Meteorology Agency) API.
+
+## Usage
+
+Execute both scripts from the skill root directory to fetch and format the weather forecast:
+
+```bash
+cd ~/.openclaw/skills/euskalmet
+./venv/bin/python3 main.py && ./venv/bin/python3 format_forecast.py
+```
+
+**Important:** Always run both scripts in sequence. The first (`main.py`) downloads the raw JSON forecast data, and the second (`format_forecast.py`) formats it into a human-readable message in Basque.
+
+### Output
+
+The formatted output includes:
+- **Current date** in the header (e.g., "Gaur (2026-03-24)")
+- **Location name** (e.g., "Laudion")
+- **Weather description** with emoji
+- **Min/Max temperatures** for today
+- **3-day forecast** with weather, emoji, and temperature ranges
+
+Example output:
+```
+Egun on, Urtzi! ✨
+
+Gaur (2026-03-24) Laudion **Zaparrada txikiak** 🌧️ izango dugu, 11.5 °C maximoarekin eta 5.8 °C minimoarekin.
+
+Hona hemen datozen egunetarako joera:
+📅 **Bihar:** Euri txikia 🌧️ | ⬇️ 4.4 °C  ⬆️ 9.1 °C
+📅 **Etzi:** Zaparrada txikiak 🌧️ | ⬇️ 3.1 °C  ⬆️ 10.9 °C
+📅 **Etzidamu:** Euri txikia 🌧️ | ⬇️ 2.2 °C  ⬆️ 11.5 °C
+
+Egun bikaina izan! 🚀
+```
+
+## Files
+
+### Scripts
+- `main.py` — Downloads the raw JSON forecast from the Euskalmet API and saves it to `forecasts/`
+- `format_forecast.py` — Reads the JSON and outputs a formatted Basque-language weather message
+
+### Data
+- `forecasts/<location>-euskalmet.json` — Raw JSON data for each location
+- `available-locations.json` — List of available locations supported by the API
+
+## Directory Structure
+
+```
+euskalmet/
+├── SKILL.md                  # This file
+├── main.py                   # Main script (downloads forecast data)
+├── format_forecast.py         # Formats forecast into human-readable message
+├── requirements.txt          # Python dependencies
+├── .env                      # Environment variables (API credentials)
+├── available-locations.json   # List of available locations
+├── venv/                     # Python virtual environment (Python 3.12)
+├── forecasts/                # Generated forecast JSON files
+│   └── laudio-euskalmet.json # Example: Laudio/Llodio forecast
+├── images/                   # Weather icons (legacy)
+├── images-modern/            # Modern SVG weather icons
+└── scripts/euskalmet/       # Additional utilities
+    ├── test_env.py          # Test API credentials
+    └── download_images.py   # Download weather icons
+```
+
+## Setup
+
+### 1. Virtual Environment
+
+Create (or recreate) the virtual environment with Python 3.12:
+
+```bash
+cd ~/.openclaw/skills/euskalmet
+rm -rf venv
+python3.12 -m venv venv
+./venv/bin/pip install -r requirements.txt
+```
+
+**Note:** The venv must use Python 3.12+ for compatibility with the latest dependencies.
+
+### 2. Environment Variables
+
+Configure your `.env` file with your Euskalmet API credentials:
+
+```bash
+EUSKALMET_API_EMAIL=your_email@example.com
+EUSKALMET_API_PRIVATE_KEY=your_private_key
+```
+
+To obtain API credentials, register at: https://www.euskalmet.euskadi.eus/
+
+### 3. Test Configuration
+
+Test that your API credentials are correct:
+
+```bash
+cd ~/.openclaw/skills/euskalmet
+./venv/bin/python3 scripts/euskalmet/test_env.py
+```
+
+## Additional Commands
+
+### Download Forecast for a Location
+
+```bash
+./venv/bin/python3 main.py
+```
+
+### Download Available Locations List
+
+```bash
+./venv/bin/python3 main.py --download
+```
+
+### List All Available Locations
+
+```bash
+./venv/bin/python3 main.py --locations
+```
+
+## Data Retrieved
+
+The skill extracts:
+1. **Date** — The date of the forecast (YYYY-MM-DD format)
+2. **Location** — The town/location name (e.g., "Laudio")
+3. **Weather Description** — Basque-language description (e.g., "Zaparrada txikiak")
+4. **Min/Max Temperatures** — Daily temperature range in Celsius
+5. **Weather Icons** — Emoji representation of weather conditions
+
+## Weather Conditions (Emoji Mapping)
+
+| Basque Keyword | Emoji |
+|---------------|-------|
+| oskarbi, eguzki | ☀️ |
+| hodei gutxi, hodeitsu, tarteka | 🌤️ |
+| hodei, estalia, laino | ☁️ |
+| euri, zaparrada, zirimiria | 🌧️ |
+| elur | ❄️ |
+| ekaitz | ⛈️ |
+| (default) | 🌡️ |

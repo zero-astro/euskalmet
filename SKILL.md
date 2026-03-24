@@ -47,7 +47,7 @@ Egun bikaina izan! 🚀
 - `format_forecast.py` — Reads the JSON and outputs a formatted Basque-language weather message
 - `test_env.py` — Tests that your API credentials are valid
 - `download_images.py` — Downloads weather icons from Euskalmet API
-- `test_structure.py` — Validates the forecast JSON structure
+- `test_structure.py` — Verifies the skill file structure is correct
 
 ### Data
 - `forecasts/<location>-euskalmet.json` — Raw JSON data for each location
@@ -62,7 +62,7 @@ euskalmet/
 ├── format_forecast.py         # Formats forecast into human-readable message
 ├── test_env.py              # Test API credentials
 ├── download_images.py        # Download weather icons
-├── test_structure.py         # Validate forecast JSON structure
+├── test_structure.py         # Verify skill file structure
 ├── requirements.txt          # Python dependencies
 ├── .env                      # Environment variables (API credentials) [not in repo]
 ├── available-locations.json  # List of available locations

@@ -45,6 +45,9 @@ Egun bikaina izan! 🚀
 ### Scripts
 - `main.py` — Downloads the raw JSON forecast from the Euskalmet API and saves it to `forecasts/`
 - `format_forecast.py` — Reads the JSON and outputs a formatted Basque-language weather message
+- `test_env.py` — Tests that your API credentials are valid
+- `download_images.py` — Downloads weather icons from Euskalmet API
+- `test_structure.py` — Validates the forecast JSON structure
 
 ### Data
 - `forecasts/<location>-euskalmet.json` — Raw JSON data for each location
@@ -57,17 +60,17 @@ euskalmet/
 ├── SKILL.md                  # This file
 ├── main.py                   # Main script (downloads forecast data)
 ├── format_forecast.py         # Formats forecast into human-readable message
+├── test_env.py              # Test API credentials
+├── download_images.py        # Download weather icons
+├── test_structure.py         # Validate forecast JSON structure
 ├── requirements.txt          # Python dependencies
-├── .env                      # Environment variables (API credentials)
-├── available-locations.json   # List of available locations
+├── .env                      # Environment variables (API credentials) [not in repo]
+├── available-locations.json  # List of available locations
 ├── venv/                     # Python virtual environment (Python 3.12)
-├── forecasts/                # Generated forecast JSON files
+├── forecasts/               # Generated forecast JSON files
 │   └── laudio-euskalmet.json # Example: Laudio/Llodio forecast
-├── images/                   # Weather icons (legacy)
-├── images-modern/            # Modern SVG weather icons
-└── scripts/euskalmet/       # Additional utilities
-    ├── test_env.py          # Test API credentials
-    └── download_images.py   # Download weather icons
+├── images/                  # Weather icons (legacy PNG)
+└── images-modern/           # Weather icons (modern SVG)
 ```
 
 ## Setup
@@ -96,13 +99,20 @@ EUSKALMET_API_PRIVATE_KEY=your_private_key
 
 To obtain API credentials, register at: https://www.euskalmet.euskadi.eus/
 
-### 3. Test Configuration
+### 3. Test Setup
 
 Test that your API credentials are correct:
 
 ```bash
 cd ~/.openclaw/skills/euskalmet
-./venv/bin/python3 scripts/euskalmet/test_env.py
+./venv/bin/python3 test_env.py
+```
+
+Validate the forecast JSON structure:
+
+```bash
+cd ~/.openclaw/skills/euskalmet
+./venv/bin/python3 test_structure.py
 ```
 
 ## Additional Commands
@@ -123,6 +133,12 @@ cd ~/.openclaw/skills/euskalmet
 
 ```bash
 ./venv/bin/python3 main.py --locations
+```
+
+### Download Weather Icons
+
+```bash
+./venv/bin/python3 download_images.py
 ```
 
 ## Data Retrieved

@@ -12,7 +12,7 @@ Execute both scripts from the skill root directory to fetch and format the weath
 
 ```bash
 cd ~/.openclaw/skills/euskalmet
-./venv/bin/python3 main.py && ./venv/bin/python3 format_forecast.py
+./venv/bin/python3 scripts/main.py && ./venv/bin/python3 scripts/format_forecast.py
 ```
 
 **Important:** Always run both scripts in sequence. The first (`main.py`) downloads the raw JSON forecast data, and the second (`format_forecast.py`) formats it into a human-readable message in Basque.
@@ -42,7 +42,7 @@ Egun bikaina izan! 🚀
 
 ## Files
 
-### Scripts
+### Scripts (`scripts/`)
 - `main.py` — Downloads the raw JSON forecast from the Euskalmet API and saves it to `forecasts/`
 - `format_forecast.py` — Reads the JSON and outputs a formatted Basque-language weather message
 - `test_env.py` — Tests that your API credentials are valid
@@ -57,20 +57,21 @@ Egun bikaina izan! 🚀
 
 ```
 euskalmet/
-├── SKILL.md                  # This file
-├── main.py                   # Main script (downloads forecast data)
-├── format_forecast.py         # Formats forecast into human-readable message
-├── test_env.py              # Test API credentials
-├── download_images.py        # Download weather icons
-├── test_structure.py         # Verify skill file structure
-├── requirements.txt          # Python dependencies
-├── .env                      # Environment variables (API credentials) [not in repo]
-├── available-locations.json  # List of available locations
-├── venv/                     # Python virtual environment (Python 3.12)
-├── forecasts/               # Generated forecast JSON files
+├── SKILL.md                    # This file
+├── scripts/
+│   ├── main.py                # Main script (downloads forecast data)
+│   ├── format_forecast.py     # Formats forecast into human-readable message
+│   ├── test_env.py           # Test API credentials
+│   ├── download_images.py    # Download weather icons
+│   └── test_structure.py      # Verify skill file structure
+├── requirements.txt           # Python dependencies
+├── .env                       # Environment variables (API credentials) [not in repo]
+├── available-locations.json    # List of available locations
+├── venv/                      # Python virtual environment (Python 3.12)
+├── forecasts/                 # Generated forecast JSON files
 │   └── laudio-euskalmet.json # Example: Laudio/Llodio forecast
-├── images/                  # Weather icons (legacy PNG)
-└── images-modern/           # Weather icons (modern SVG)
+├── images/                   # Weather icons (legacy PNG)
+└── images-modern/            # Weather icons (modern SVG)
 ```
 
 ## Setup
@@ -105,14 +106,14 @@ Test that your API credentials are correct:
 
 ```bash
 cd ~/.openclaw/skills/euskalmet
-./venv/bin/python3 test_env.py
+./venv/bin/python3 scripts/test_env.py
 ```
 
-Validate the forecast JSON structure:
+Verify the skill file structure:
 
 ```bash
 cd ~/.openclaw/skills/euskalmet
-./venv/bin/python3 test_structure.py
+./venv/bin/python3 scripts/test_structure.py
 ```
 
 ## Additional Commands
@@ -120,25 +121,25 @@ cd ~/.openclaw/skills/euskalmet
 ### Download Forecast for a Location
 
 ```bash
-./venv/bin/python3 main.py
+./venv/bin/python3 scripts/main.py
 ```
 
 ### Download Available Locations List
 
 ```bash
-./venv/bin/python3 main.py --download
+./venv/bin/python3 scripts/main.py --download
 ```
 
 ### List All Available Locations
 
 ```bash
-./venv/bin/python3 main.py --locations
+./venv/bin/python3 scripts/main.py --locations
 ```
 
 ### Download Weather Icons
 
 ```bash
-./venv/bin/python3 download_images.py
+./venv/bin/python3 scripts/download_images.py
 ```
 
 ## Data Retrieved

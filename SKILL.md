@@ -114,6 +114,14 @@ EUSKALMET_API_EMAIL=your_email@example.com
 EUSKALMET_API_PRIVATE_KEY=your_private_key
 ```
 
+**Optional:** Add a username for a personalized greeting:
+
+```bash
+EUSKALMET_USERNAME=YourName
+```
+
+If not set, the greeting will be "Egun on!" instead of "Egun on, YourName!"
+
 To obtain API credentials, register at: https://www.euskalmet.euskadi.eus/
 
 ### 3. Test Setup

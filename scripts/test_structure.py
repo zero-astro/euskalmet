@@ -18,7 +18,7 @@ def main():
     checks = []
     
     # Check main files
-    checks.append(check_file("main.py", "Main script"))
+    checks.append(check_file("scripts/main.py", "Main script"))
     checks.append(check_file("requirements.txt", "Requirements file"))
     checks.append(check_file(".env", "Environment file"))
     checks.append(check_file("available-locations.json", "Locations file"))

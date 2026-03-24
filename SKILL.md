@@ -15,6 +15,22 @@ cd ~/.openclaw/skills/euskalmet
 ./venv/bin/python3 scripts/main.py && ./venv/bin/python3 scripts/format_forecast.py
 ```
 
+**Optional:** Pass a username for a personalized greeting:
+
+```bash
+./venv/bin/python3 scripts/format_forecast.py --username "Urtzi"
+# Output: "Egun on, Urtzi! ✨"
+
+# Without username:
+# Output: "Egun on! ✨"
+```
+
+You can also set `EUSKALMET_USERNAME` in your `.env` file:
+
+```bash
+EUSKALMET_USERNAME=Urtzi
+```
+
 **Important:** Always run both scripts in sequence. The first (`main.py`) downloads the raw JSON forecast data, and the second (`format_forecast.py`) formats it into a human-readable message in Basque.
 
 ### Output

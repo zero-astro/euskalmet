@@ -1,6 +1,15 @@
 import json
 import os
+import argparse
 from datetime import datetime
+
+# Parse command-line arguments
+parser = argparse.ArgumentParser(description="Format Euskalmet forecast")
+parser.add_argument("--username", help="Username for greeting")
+args = parser.parse_args()
+
+# Get username from env or args (args takes priority)
+username = args.username or os.environ.get("EUSKALMET_USERNAME")
 
 json_path = "forecasts/laudio-euskalmet.json"
 if not os.path.exists(json_path):
@@ -41,7 +50,8 @@ t_emoji = get_emoji(t_desc)
 # Gaurko data formateatu
 today_date = datetime.strptime(today["date"], "%Y-%m-%dT%H:%M:%SZ").strftime("%Y-%m-%d")
 
-msg = f"Egun on, Urtzi! ✨\n\n"
+greeting = f"Egun on, {username}!" if username else "Egun on!"
+msg = f"{greeting} ✨\n\n"
 msg += f"Gaur ({today_date}) Laudion **{t_desc}** {t_emoji} izango dugu, {t_max} °C maximoarekin eta {t_min} °C minimoarekin.\n\n"
 msg += "Hona hemen datozen egunetarako joera:\n"
 

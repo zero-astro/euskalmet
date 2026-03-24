@@ -25,10 +25,10 @@ cd ~/.openclaw/skills/euskalmet
 # Output: "Egun on! ✨"
 ```
 
-You can also set `EUSKALMET_USERNAME` in your `.env` file:
+You can also set `EUSKALMET_GREETING_NAME` in your `.env` file (not related to API credentials — used only for the greeting):
 
 ```bash
-EUSKALMET_USERNAME=Urtzi
+EUSKALMET_GREETING_NAME=Urtzi
 ```
 
 **Important:** Always run both scripts in sequence. The first (`main.py`) downloads the raw JSON forecast data, and the second (`format_forecast.py`) formats it into a human-readable message in Basque.
@@ -114,10 +114,10 @@ EUSKALMET_API_EMAIL=your_email@example.com
 EUSKALMET_API_PRIVATE_KEY=your_private_key
 ```
 
-**Optional:** Add a username for a personalized greeting:
+**Optional:** Add a name for a personalized greeting (not related to API credentials):
 
 ```bash
-EUSKALMET_USERNAME=YourName
+EUSKALMET_GREETING_NAME=YourName
 ```
 
 If not set, the greeting will be "Egun on!" instead of "Egun on, YourName!"

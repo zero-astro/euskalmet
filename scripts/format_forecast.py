@@ -2,6 +2,10 @@ import json
 import os
 import argparse
 from datetime import datetime
+from dotenv import load_dotenv
+
+# Load .env file
+load_dotenv()
 
 # Parse command-line arguments
 parser = argparse.ArgumentParser(description="Format Euskalmet forecast")
@@ -9,7 +13,7 @@ parser.add_argument("--username", help="Username for greeting")
 args = parser.parse_args()
 
 # Get username from env or args (args takes priority)
-username = args.username or os.environ.get("EUSKALMET_USERNAME")
+username = args.username or os.environ.get("EUSKALMET_GREETING_NAME")
 
 json_path = "forecasts/laudio-euskalmet.json"
 if not os.path.exists(json_path):
